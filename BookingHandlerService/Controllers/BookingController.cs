@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BookingHandlerService.Models;
 using System.Text.Json;
+using BookingHandlerService.Messaging;
 
 namespace BookingHandlerService.Controllers;
 
@@ -20,7 +21,15 @@ public class BookingController : ControllerBase
     [HttpPost]
     public void PostBooking(BookingDTO booking)
     {
+        PlanDTO planDTO = new PlanDTO()
+        {
+            CustomerName = booking.CustomerName,
+            StartTime = booking.StartTime,
+            StartLocation = booking.StartLocation,
+            EndLocation = booking.EndLocation
+        };
 
+        MessagingHandler.SendDTO(planDTO);
     }
 
     [HttpGet]

@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Connections;
 using RabbitMQ.Client;
+using BookingHandlerService.Models;
+using System.Text.Json;
 
 namespace BookingHandlerService.Messaging
 {
@@ -8,25 +10,25 @@ namespace BookingHandlerService.Messaging
     {
         public MessagingHandler() 
         {
-            
         }
-        public void SendDTO()
+
+        public static void SendDTO(PlanDTO planDTO)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
-            channel.QueueDeclare(queue: "hello",
+            channel.QueueDeclare(queue: "plan",
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
                                  arguments: null);
 
-            const string message = "Hello World!";
-            var body = Encoding.UTF8.GetBytes(message);
+            string planDTOJson = JsonSerializer.Serialize(planDTO);
+            var body = Encoding.UTF8.GetBytes(planDTOJson);
 
             channel.BasicPublish(exchange: string.Empty,
-                                 routingKey: "hello",
+                                 routingKey: "plan",
                                  basicProperties: null,
                                  body: body);
         }
