@@ -35,7 +35,11 @@ public class BookingController : ControllerBase
     [HttpGet]
     public IActionResult GetPlanFile()
     {
-        string planFileJson = JsonSerializer.Serialize(ReadPlanCSV());
+        List<PlanDTO> planList = ReadPlanCSV();
+
+        planList.OrderByDescending(p => p.StartTime);
+
+        string planFileJson = JsonSerializer.Serialize(planList);
 
         return Ok(planFileJson);
     }
