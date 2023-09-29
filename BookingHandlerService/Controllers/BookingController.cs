@@ -14,7 +14,7 @@ public class BookingController : ControllerBase
 
     public BookingController(IConfiguration configuration, ILogger<BookingController> logger)
     {
-        _filepath = configuration["filepath"] ?? String.Empty;
+        _filepath = configuration["WorkPath"] ?? String.Empty;
         _logger = logger;
     }
 
