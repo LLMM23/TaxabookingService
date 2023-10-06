@@ -18,6 +18,7 @@ public class BookingController : ControllerBase
         _filepath = configuration["WorkPath"] ?? string.Empty;
         _mqHost = configuration["MqHost"] ?? string.Empty;
         _logger = logger;
+        _logger.LogInformation($"env: {_filepath}, {_mqHost}");
     }
 
     [HttpPost]
