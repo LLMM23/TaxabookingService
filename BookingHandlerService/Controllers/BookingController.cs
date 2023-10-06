@@ -11,10 +11,12 @@ public class BookingController : ControllerBase
 {
     string _filepath = string.Empty;
     private readonly ILogger<BookingController> _logger;
+    string _mqHost = string.Empty;
 
     public BookingController(IConfiguration configuration, ILogger<BookingController> logger)
     {
-        _filepath = configuration["WorkPath"] ?? String.Empty;
+        _filepath = configuration["WorkPath"] ?? string.Empty;
+        _mqHost = configuration["MqHost"] ?? string.Empty;
         _logger = logger;
     }
 
@@ -29,7 +31,7 @@ public class BookingController : ControllerBase
             EndLocation = booking.EndLocation
         };
 
-        MessagingHandler.SendDTO(planDTO);
+        MessagingHandler.SendDTO(planDTO, _mqHost);
     }
 
     [HttpGet]

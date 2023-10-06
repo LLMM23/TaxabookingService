@@ -12,9 +12,9 @@ namespace BookingHandlerService.Messaging
         {
         }
 
-        public static void SendDTO(PlanDTO planDTO)
+        public static void SendDTO(PlanDTO planDTO, string path)
         {
-            var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { HostName = path };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
