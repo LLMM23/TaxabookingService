@@ -47,7 +47,7 @@ public class BookingController : ControllerBase
         return Ok(planFileJson);
     }
 
-    public List<PlanDTO> ReadPlanCSV()
+    private List<PlanDTO> ReadPlanCSV()
     {
         string[] csv = System.IO.File.ReadAllLines(_filepath);
         List<PlanDTO> plan = new List<PlanDTO>();
