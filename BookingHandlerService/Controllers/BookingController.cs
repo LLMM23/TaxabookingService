@@ -49,7 +49,7 @@ public class BookingController : ControllerBase
 
     private List<PlanDTO> ReadPlanCSV()
     {
-        string[] csv = System.IO.File.ReadAllLines(_filepath);
+        string[] csv = System.IO.File.ReadAllLines(Path.Combine(_filepath, "Plan.csv"));
         List<PlanDTO> plan = new List<PlanDTO>();
 
         foreach (var line in csv)
@@ -61,6 +61,7 @@ public class BookingController : ControllerBase
             planDTO.StartTime = DateTime.Parse(fields[1]);
             planDTO.StartLocation = fields[2];
             planDTO.EndLocation = fields[3];
+            plan.Add(planDTO);
         }
 
         return plan;
