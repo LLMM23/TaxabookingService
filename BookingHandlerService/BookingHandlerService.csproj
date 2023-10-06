@@ -4,6 +4,19 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<Company>LLMM23</Company>
+	<Authors>Mads, Magnus</Authors>
+	<Copyright>MIT</Copyright>
+	<AssemblyVersion>1.0.0</AssemblyVersion>
+	<FileVersion>1.0.0</FileVersion>
+	<InformationalVersion>1.0.0</InformationalVersion>
+	<Description>
+		1.0.0 Updated with semantic versioning
+		0.9.7 Fixed csv parser
+		0.9.6 Removed Https rerouting to circumvent security measures
+		0.9.5 Removed Authentication because it came in the way of velocity
+	</Description>
+	
   </PropertyGroup>
 
   <ItemGroup>
