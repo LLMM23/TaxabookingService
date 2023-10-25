@@ -2,7 +2,7 @@
 WORKDIR /app
 
 COPY . .
-RUN dotnet restore
+RUN dotnet restore BookingHandlerService/BookingHandlerService.csproj
 RUN dotnet publish -o /app/published-app
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine as runtime
