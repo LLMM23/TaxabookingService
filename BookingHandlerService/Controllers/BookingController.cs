@@ -39,6 +39,8 @@ public class BookingController : ControllerBase
     [HttpGet]
     public IActionResult GetPlanFile()
     {
+        _logger.LogInformation("Get plan endpoint called");
+
         List<PlanDTO> planList = ReadPlanCSV();
 
         planList.OrderByDescending(p => p.StartTime);
