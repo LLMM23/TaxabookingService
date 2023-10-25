@@ -51,6 +51,8 @@ public class BookingController : ControllerBase
     [HttpGet("version")]
     public async Task<Dictionary<string, string>> GetVersion()
     {
+        _logger.LogInformation("Version endpoint called");
+
         var properties = new Dictionary<string, string>();
         var assembly = typeof(Program).Assembly;
         properties.Add("service", "qgt-customer-service");
