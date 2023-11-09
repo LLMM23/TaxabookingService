@@ -20,6 +20,11 @@ public class BookingController : ControllerBase
         _mqHost = configuration["MqHost"] ?? string.Empty;
         _logger = logger;
         _logger.LogInformation($"env: {_filepath}, {_mqHost}");
+
+        var hostName = System.Net.Dns.GetHostName();
+        var ips = System.Net.Dns.GetHostAddresses(hostName);
+        var ipaddress = ips.First().MapToIPv4().ToString();
+        _logger.LogInformation(1, $"BookingHandler responding from {ipaddress}");
     }
 
     [HttpPost]
@@ -33,12 +38,16 @@ public class BookingController : ControllerBase
             EndLocation = booking.EndLocation
         };
 
+        _logger.LogInformation("Endpoint for storing booking called");
+
         MessagingHandler.SendDTO(planDTO, _mqHost);
     }
 
     [HttpGet]
     public IActionResult GetPlanFile()
     {
+        _logger.LogInformation("Get plan endpoint called");
+
         List<PlanDTO> planList = ReadPlanCSV();
 
         planList.OrderByDescending(p => p.StartTime);
@@ -74,7 +83,7 @@ public class BookingController : ControllerBase
         return properties;
     }
 
-private List<PlanDTO> ReadPlanCSV()
+    private List<PlanDTO> ReadPlanCSV()
     {
         string[] csv = System.IO.File.ReadAllLines(Path.Combine(_filepath, "Plan.csv"));
         List<PlanDTO> plan = new List<PlanDTO>();

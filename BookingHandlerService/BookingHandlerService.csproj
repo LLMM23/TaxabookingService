@@ -7,10 +7,11 @@
 	<Company>LLMM23</Company>
 	<Authors>Mads, Magnus</Authors>
 	<Copyright>MIT</Copyright>
-	<AssemblyVersion>1.1.1</AssemblyVersion>
-	<FileVersion>1.1.1</FileVersion>
-	<InformationalVersion>1.1.1</InformationalVersion>
+	<AssemblyVersion>1.2.0</AssemblyVersion>
+	<FileVersion>1.2.0</FileVersion>
+	<InformationalVersion>1.2.0</InformationalVersion>
 	<Description>
+		1.2.0 Added NLog to project
 		1.1.1 Added logging to versioning endpoint
 		1.1.0 Added endpoint for versioning
 		1.0.0 Updated with semantic versioning
@@ -22,7 +23,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="NLog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <None Include="NLog.config">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
+    <PackageReference Include="NLog" Version="5.2.5" />
+    <PackageReference Include="NLog.Targets.Loki" Version="2.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.5" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
